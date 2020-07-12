@@ -10,11 +10,12 @@
     <GenerateNugetPackage>true</GenerateNugetPackage>
 	<Version>0.0.0</Version>
     <Product>OpenMod JavaScript</Product>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.ClearScript" Version="6.0.2" />
     <PackageReference Include="OpenMod.Core" Version="1.0.6" />
+    <PackageReference Include="V8.Net" Version="1.1.8" />
   </ItemGroup>
 
   <ItemGroup>

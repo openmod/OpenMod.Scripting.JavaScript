@@ -1,1 +1,2 @@
-enableDebug: false
+v8Flags:
+  default: ""
