@@ -13,7 +13,7 @@ using OpenMod.Core.Plugins;
 using OpenMod.NuGet;
 using V8.Net;
 
-[assembly: PluginMetadata("OpenMod.Scripting.JavaScript", DisplayName = "OpenMod JavaScript")]
+[assembly: PluginMetadata("OpenMod.Scripting.JavaScript", DisplayName = "OpenMod JavaScript Support")]
 namespace OpenMod.Scripting.JavaScript
 {
     [UsedImplicitly]
