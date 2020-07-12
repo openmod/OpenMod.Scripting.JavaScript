@@ -43,7 +43,9 @@ namespace OpenMod.Scripting.JavaScript
         [ScriptMember("getType", ScriptMemberSecurity.Locked)]
         public Type GetType(string name)
         {
-            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetLoadableTypes()).FirstOrDefault(x => x.Name.Equals(name, StringComparison.Ordinal));
+            return AppDomain.CurrentDomain.GetAssemblies()
+                .Select(a => a.GetType(name, false, true))
+                .FirstOrDefault(t => t != null);
         }
     }
 }
