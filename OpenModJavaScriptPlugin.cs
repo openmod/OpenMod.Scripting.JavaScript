@@ -93,7 +93,7 @@ namespace OpenMod.Scripting.JavaScript
                         continue;
                     }
 
-                    var scriptId = Path.GetDirectoryName(directory);
+                    var scriptId = new DirectoryInfo(directory).Name;
 
                     m_Engine = new V8Engine(true);
                     var globalContext = m_Engine.GetContext();
