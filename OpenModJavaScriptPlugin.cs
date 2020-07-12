@@ -76,6 +76,7 @@ namespace OpenMod.Scripting.JavaScript
                             "System",
                             "System.Core",
                             "System.Numerics",
+                            "Microsoft.Extensions.Logging",
                             "ClearScript"));
 
                         engine.SuppressExtensionMethodEnumeration = true;
@@ -90,8 +91,9 @@ namespace OpenMod.Scripting.JavaScript
                     try
                     {
                         var serviceProvider = scriptLifeTime.Resolve<IServiceProvider>();
+                        engine.AddHostObject("logger", ActivatorUtilities.CreateInstance<ScriptLogger>(serviceProvider, scriptId));
                         engine.AddHostObject("openmod", ActivatorUtilities.CreateInstance<OpenModFunctions>(serviceProvider));
-                        engine.Execute(new DocumentInfo(new Uri(filePath)), File.ReadAllText(filePath));
+                        engine.Evaluate(new DocumentInfo(new Uri(filePath)), File.ReadAllText(filePath));
                     }
                     catch (Exception ex)
                     {
