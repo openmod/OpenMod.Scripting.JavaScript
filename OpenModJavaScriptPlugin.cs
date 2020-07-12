@@ -99,7 +99,6 @@ namespace OpenMod.Scripting.JavaScript
                     var globalContext = m_Engine.GetContext();
                     var v8Context = m_Engine.CreateContext();
 
-
                     var scriptLifeTime = m_LifetimeScope.BeginLifetimeScope(builder =>
                     {
                         builder.Register(ctx => m_Engine)
@@ -117,10 +116,12 @@ namespace OpenMod.Scripting.JavaScript
                     {
                         var serviceProvider = scriptLifeTime.Resolve<IServiceProvider>();
                         m_Engine.SetContext(v8Context);
-                        m_Engine.GlobalObject.SetProperty("logger", ActivatorUtilities.CreateInstance<ScriptLogger>(serviceProvider, scriptId));
-                        m_Engine.GlobalObject.SetProperty("openmod", ActivatorUtilities.CreateInstance<OpenModFunctions>(serviceProvider));
-                        m_Engine.Execute(File.ReadAllText(filePath), scriptId, throwExceptionOnError: true, trackReturn: false);
-                        m_Engine.SetContext(globalContext);
+                        m_Engine.GlobalObject.SetProperty("logger", ActivatorUtilities.CreateInstance<ScriptLogger>(serviceProvider, scriptId), memberSecurity: ScriptMemberSecurity.Locked);
+                        m_Engine.GlobalObject.SetProperty("openmod", ActivatorUtilities.CreateInstance<OpenModFunctions>(serviceProvider), memberSecurity: ScriptMemberSecurity.Locked);
+                        var script = m_Engine.LoadScript(filePath, throwExceptionOnError: true);
+                        m_Engine.Execute(script, throwExceptionOnError: true, trackReturn: false);
+                        m_Engine.SetContext(globalContext); 
+                        GC.KeepAlive(script);
                     }
                     catch (Exception ex)
                     {
