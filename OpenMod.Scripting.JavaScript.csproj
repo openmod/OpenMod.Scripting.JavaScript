@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	<PackageId>OpenMod.Scripting.JavaScript</PackageId>
+    <PackageLicenseExpression>EUPL-1.2</PackageLicenseExpression>
+	<PackageTags>openmod openmod-plugin universal</PackageTags>
+	<RootNamespace>OpenMod.Scripting.JavaScript</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateNugetPackage>true</GenerateNugetPackage>
+	<Version>0.0.0</Version>
+    <Product>OpenMod JavaScript</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ClearScript" Version="6.0.2" />
+    <PackageReference Include="OpenMod.Core" Version="1.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="config.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
